@@ -1,0 +1,1098 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Building2, Users, HardHat, Sparkles, Stethoscope, Factory, 
+  Truck, Utensils, ShieldCheck, CheckCircle2, Phone, Mail, 
+  MapPin, Clock, ArrowRight, Menu, X, ChevronRight, Send, 
+  Download, MessageCircle, ExternalLink, Award, FileCheck
+} from 'lucide-react';
+
+// ============================================================================
+// DATA DEFINITIONS & CONSTANTS
+// ============================================================================
+const SECTORS = [
+  {
+    id: 'construction',
+    name: 'Construction & Civil Trades',
+    arabic: 'الإنشاءات والمقاولات المدنية',
+    icon: HardHat,
+    flagship: true,
+    desc: 'Certified Engineers, Foremen, Masons, Steel Fixers, Carpenters, Welders, Pipefitters & Heavy Equipment Operators.',
+    roles: ['Civil Engineer', 'Electrical Technician', 'Certified Welder (6G)', 'Pipe Fitter', 'Mason / Plasterer', 'Steel Fixer', 'Heavy Machine Operator']
+  },
+  {
+    id: 'medical',
+    name: 'Medical & Healthcare Staff',
+    arabic: 'الرعاية الصحية والكوادر الطبية',
+    icon: Stethoscope,
+    desc: 'Registered Nurses, Patient Care Attendants, Lab Technicians, Clinic Receptionists & Hospital Sanitization Teams.',
+    roles: ['Staff Nurse (RN)', 'Healthcare Assistant', 'Laboratory Tech', 'Clinic Support Staff', 'Hospital Sanitarian']
+  },
+  {
+    id: 'cleaning',
+    name: 'Cleaning & Facility Janitorial',
+    arabic: 'النظافة العامة وإدارة المرافق',
+    icon: Sparkles,
+    desc: 'Industrial Cleaners, Commercial Janitorial Staff, Façade Rope Access Specialists & Sanitization Crews.',
+    roles: ['General Cleaner', 'Industrial Janitor', 'Façade Rope Access Tech', 'Facility Supervisor']
+  },
+  {
+    id: 'factory',
+    name: 'Factory & Production Line',
+    arabic: 'العمالة الصناعية وخطوط الإنتاج',
+    icon: Factory,
+    desc: 'Assembly Technicians, Machine Operators, Packing Specialists, QA Assistants & Industrial Maintenance Crews.',
+    roles: ['Assembly Line Worker', 'Machine Operator', 'Packaging Specialist', 'Forklift Driver', 'Maintenance Tech']
+  },
+  {
+    id: 'logistics',
+    name: 'Logistics, Fleet & Warehouse',
+    arabic: 'الخدمات اللوجستية والمستودعات',
+    icon: Truck,
+    desc: 'Warehouse Pickers/Packers, Certified Forklift Drivers, Inventory Coordinators & Fleet Logistics Drivers.',
+    roles: ['Warehouse Coordinator', 'Heavy Fleet Driver', 'Forklift Operator', 'Inventory Controller', 'Picker / Packer']
+  },
+  {
+    id: 'hospitality',
+    name: 'Hospitality & Catering Workforce',
+    arabic: 'الضيافة وخدمات الإعاشة',
+    icon: Utensils,
+    desc: 'Executive Chefs, Line Cooks, Baristas, Banquet Stewards, Waitstaff & Camp Catering Personnel.',
+    roles: ['Line Cook / Commis', 'Head Steward', 'Waitstaff / Server', 'Barista', 'Industrial Camp Caterer']
+  }
+];
+
+const PROJECTS = [
+  {
+    title: 'NEOM Infrastructure Logistics Hub',
+    sector: 'construction',
+    workers: '350+ Deployed',
+    period: '2023 - Present',
+    badge: 'Heavy Construction'
+  },
+  {
+    title: 'Riyadh Tertiary Medical Center',
+    sector: 'medical',
+    workers: '120 Nurses & Techs',
+    period: 'Contract Ongoing',
+    badge: 'Healthcare Support'
+  },
+  {
+    title: 'Jeddah International FMCG Plant',
+    sector: 'factory',
+    workers: '200 Line Operators',
+    period: 'Multi-year Contract',
+    badge: 'Industrial Manpower'
+  },
+  {
+    title: 'King Fahd Airport Cargo Terminal',
+    sector: 'logistics',
+    workers: '95 Warehouse Staff',
+    period: 'Completed',
+    badge: 'Supply Chain'
+  }
+];
+
+// ============================================================================
+// LOGO COMPONENT WITH SAFE SVG FALLBACK
+// ============================================================================
+export const BrandLogo = ({ className = "h-10", dark = false }) => {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <div className="flex items-center gap-3 select-none">
+      {!imgError ? (
+        <img 
+          src="/logo.png" 
+          alt="Afaq Al Mitanah" 
+          onError={() => setImgError(true)}
+          className={`${className} object-contain`} 
+        />
+      ) : (
+        <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-navy-900 border border-gold-500/50 shadow-md">
+          <HardHat className="h-6 w-6 text-gold-500" />
+        </div>
+      )}
+      <div className="flex flex-col">
+        <span className={`font-black tracking-tight text-lg leading-none ${dark ? 'text-white' : 'text-navy-950'}`}>
+          AFAQ AL MITANAH
+        </span>
+        <span className="text-[11px] font-semibold text-gold-600 tracking-wider font-mono">
+          أفــاق الـمـتـانـة للمقاولات والتشغيل
+        </span>
+      </div>
+    </div>
+  );
+};
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+export default function AfaqAlMitanahApp() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('all');
+
+  // Interactive Configurator State ("Build a Team")
+  const [configSector, setConfigSector] = useState(SECTORS[0].id);
+  const [configRole, setConfigRole] = useState(SECTORS[0].roles[0]);
+  const [configQuantity, setConfigQuantity] = useState(25);
+  const [configDuration, setConfigDuration] = useState('6 Months');
+  const [configLocation, setConfigLocation] = useState('Riyadh');
+  const [clientName, setClientName] = useState('');
+  const [clientPhone, setClientPhone] = useState('');
+
+  // Contact Form State
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    service: 'Construction & Civil Trades',
+    message: ''
+  });
+
+  // Update selected role when sector changes in wizard
+  useEffect(() => {
+    const matched = SECTORS.find(s => s.id === configSector);
+    if (matched && matched.roles.length > 0) {
+      setConfigRole(matched.roles[0]);
+    }
+  }, [configSector]);
+
+  const handleWhatsAppQuote = () => {
+    const text = encodeURIComponent(
+      `*Afaq Al Mitanah - Workforce Quote Request*\n` +
+      `-----------------------------------------\n` +
+      `• *Client Name:* ${clientName || 'Valued Corporate Partner'}\n` +
+      `• *Phone:* ${clientPhone || 'Not specified'}\n` +
+      `• *Sector:* ${SECTORS.find(s => s.id === configSector)?.name}\n` +
+      `• *Required Role:* ${configRole}\n` +
+      `• *Headcount Required:* ${configQuantity} Workers\n` +
+      `• *Project Duration:* ${configDuration}\n` +
+      `• *Location:* ${configLocation}\n` +
+      `-----------------------------------------\n` +
+      `Please provide rate sheet and availability schedule.`
+    );
+    window.open(`https://wa.me/966500000000?text=${text}`, '_blank');
+  };
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    setTimeout(() => {
+      setFormSubmitted(false);
+      setFormData({ name: '', company: '', email: '', phone: '', service: 'Construction & Civil Trades', message: '' });
+    }, 5000);
+  };
+
+  const scrollToSection = (id) => {
+    setMobileMenuOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans selection:bg-gold-500 selection:text-white">
+
+      {/* TOP NOTIFICATION / CONTACT BAR */}
+      <div className="bg-navy-950 text-slate-300 text-xs py-2 px-4 sm:px-8 border-b border-navy-800">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+          <div className="flex flex-wrap items-center gap-5">
+            <span className="flex items-center gap-1.5 hover:text-gold-400 transition-colors">
+              <Phone className="w-3.5 h-3.5 text-gold-500" /> +966 11 000 0000 / +966 50 000 0000
+            </span>
+            <span className="flex items-center gap-1.5 hover:text-gold-400 transition-colors">
+              <Mail className="w-3.5 h-3.5 text-gold-500" /> info@afaqmitanah.com
+            </span>
+            <span className="hidden lg:flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-gold-500" /> Sun - Thu: 8:00 AM - 6:00 PM (AST)
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-navy-800 text-gold-400 border border-gold-500/20">
+              <ShieldCheck className="w-3 h-3 mr-1 text-emerald-400" /> Fully Qiwa & Ajeer Compliant
+            </span>
+            <span className="cursor-pointer hover:text-gold-400 font-semibold text-[11px]">العربية (KSA)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* STICKY MAIN NAVBAR */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm transition-all">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+          <BrandLogo />
+
+          <nav className="hidden lg:flex items-center gap-8 font-medium text-sm text-slate-700">
+            <button onClick={() => scrollToSection('home')} className="hover:text-gold-600 transition-colors">Home</button>
+            <button onClick={() => scrollToSection('about')} className="hover:text-gold-600 transition-colors">About Us</button>
+            <button onClick={() => scrollToSection('services')} className="hover:text-gold-600 transition-colors">Services</button>
+            <button onClick={() => scrollToSection('sectors')} className="hover:text-gold-600 transition-colors">Sectors</button>
+            <button onClick={() => scrollToSection('builder')} className="hover:text-gold-600 transition-colors text-navy-900 font-bold flex items-center gap-1">
+              Build a Team <span className="bg-gold-500 text-navy-950 text-[10px] font-extrabold px-1.5 py-0.5 rounded">NEW</span>
+            </button>
+            <button onClick={() => scrollToSection('projects')} className="hover:text-gold-600 transition-colors">Projects</button>
+            <button onClick={() => scrollToSection('contact')} className="hover:text-gold-600 transition-colors">Contact</button>
+          </nav>
+
+          <div className="hidden lg:flex items-center gap-3">
+            <button 
+              onClick={() => scrollToSection('builder')}
+              className="px-5 py-2.5 rounded-lg bg-navy-900 hover:bg-navy-800 text-white font-semibold text-sm transition-all shadow-md hover:shadow-lg border border-navy-700"
+            >
+              Request Workforce
+            </button>
+          </div>
+
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+            className="lg:hidden p-2 text-slate-700 hover:text-navy-900"
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* MOBILE DRAWER */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden border-b border-slate-200 bg-white px-6 py-5 space-y-4 shadow-xl"
+            >
+              <div className="flex flex-col gap-3 font-medium text-slate-700">
+                <button onClick={() => scrollToSection('home')} className="text-left py-2 hover:text-gold-600">Home</button>
+                <button onClick={() => scrollToSection('about')} className="text-left py-2 hover:text-gold-600">About Us</button>
+                <button onClick={() => scrollToSection('services')} className="text-left py-2 hover:text-gold-600">Services</button>
+                <button onClick={() => scrollToSection('sectors')} className="text-left py-2 hover:text-gold-600">Sectors</button>
+                <button onClick={() => scrollToSection('builder')} className="text-left py-2 text-navy-950 font-bold">Build a Team (Calculator)</button>
+                <button onClick={() => scrollToSection('projects')} className="text-left py-2 hover:text-gold-600">Projects</button>
+                <button onClick={() => scrollToSection('contact')} className="text-left py-2 hover:text-gold-600">Contact Us</button>
+              </div>
+              <button 
+                onClick={() => scrollToSection('builder')} 
+                className="w-full py-3 rounded-lg bg-navy-900 text-white font-semibold text-center shadow-md"
+              >
+                Request Workforce Immediately
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+
+      {/* =========================================================================
+          HERO SECTION
+      ========================================================================= */}
+      <section id="home" className="relative overflow-hidden bg-navy-950 text-white pt-16 pb-24 lg:pt-28 lg:pb-32">
+        {/* Abstract background grid */}
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-gold-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-navy-900/80 border border-gold-500/30 text-gold-400 text-xs font-semibold">
+                <Award className="w-4 h-4 text-gold-500" />
+                Premier Saudi Workforce & Manpower Contracting
+              </div>
+
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                Reliable & Skilled <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-amber-500">Manpower Solutions</span> for Large-Scale Projects
+              </h1>
+
+              <p className="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                Empowering Saudi Arabia's leading enterprises with fully vetted, certified, and compliant workforce supply across Civil Construction, Medical Facilities, Logistics, and Industrial Production.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
+                <button 
+                  onClick={() => scrollToSection('builder')}
+                  className="px-8 py-4 rounded-xl bg-gold-500 hover:bg-gold-600 text-navy-950 font-extrabold text-base transition-all shadow-lg hover:shadow-gold-500/20 flex items-center justify-center gap-2 group"
+                >
+                  Build Your Team
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button 
+                  onClick={() => scrollToSection('services')}
+                  className="px-8 py-4 rounded-xl bg-navy-900 hover:bg-navy-800 text-slate-200 border border-slate-700 font-bold text-base transition-all flex items-center justify-center"
+                >
+                  Explore Services
+                </button>
+              </div>
+
+              {/* STATS STRIP */}
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-navy-800 max-w-lg mx-auto lg:mx-0">
+                <div>
+                  <div className="text-2xl sm:text-3xl font-black text-gold-400">1,500+</div>
+                  <div className="text-xs text-slate-400 font-medium">Workers Deployed</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-black text-white">75+</div>
+                  <div className="text-xs text-slate-400 font-medium">Corporate Clients</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-black text-gold-400">99.4%</div>
+                  <div className="text-xs text-slate-400 font-medium">Ajeer Compliance</div>
+                </div>
+              </div>
+            </div>
+
+            {/* HERO VISUAL CARD */}
+            <div className="lg:col-span-5">
+              <div className="relative mx-auto max-w-md lg:max-w-none">
+                <div className="glass-card-dark rounded-2xl p-6 shadow-2xl border border-navy-800 relative">
+                  <div className="flex items-center justify-between border-b border-navy-800 pb-4 mb-5">
+                    <div className="flex items-center gap-3">
+                      <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                      <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                      <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                      <span className="text-xs font-mono text-slate-400">KSA Rapid Deployment</span>
+                    </div>
+                    <span className="text-[10px] bg-emerald-500/20 text-emerald-400 font-mono px-2 py-0.5 rounded border border-emerald-500/30">
+                      LIVE DISPATCH
+                    </span>
+                  </div>
+
+                  <div className="space-y-3.5">
+                    {[
+                      { role: 'Civil Construction & Tradesmen', count: '450+ On Site', icon: HardHat, color: 'text-amber-400' },
+                      { role: 'Certified Healthcare Personnel', count: '180+ Active', icon: Stethoscope, color: 'text-sky-400' },
+                      { role: 'Warehouse Logistics Operators', count: '290+ Active', icon: Truck, color: 'text-emerald-400' },
+                      { role: 'Industrial Plant Technicians', count: '160+ Active', icon: Factory, color: 'text-purple-400' }
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-navy-900/60 border border-navy-800">
+                        <div className="flex items-center gap-3">
+                          <item.icon className={`w-5 h-5 ${item.color}`} />
+                          <span className="text-sm font-semibold text-slate-200">{item.role}</span>
+                        </div>
+                        <span className="text-xs font-bold text-slate-400">{item.count}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-navy-800 text-center">
+                    <p className="text-xs text-slate-400">
+                      Need emergency crew mobilization in 48-72 hours?
+                    </p>
+                    <button 
+                      onClick={() => scrollToSection('builder')} 
+                      className="mt-2 text-xs font-bold text-gold-400 hover:text-gold-300 inline-flex items-center gap-1"
+                    >
+                      Instant Staffing Configurator <ChevronRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          CORE SPECIALIZATION BANNER (FLAGSHIP EMPHASIS)
+      ========================================================================= */}
+      <section className="bg-gradient-to-r from-amber-600 via-gold-500 to-amber-600 py-6 text-navy-950 font-bold shadow-md">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-navy-950 text-gold-400">
+              <HardHat className="w-6 h-6" />
+            </div>
+            <div>
+              <h4 className="text-lg font-black tracking-tight uppercase">Flagship Strength: Civil & Construction Trades Supply</h4>
+              <p className="text-xs text-navy-900 font-medium">Turnkey teams for mega-infrastructure, structural steel, mechanical, & finishing trades.</p>
+            </div>
+          </div>
+          <button 
+            onClick={() => scrollToSection('builder')} 
+            className="px-5 py-2.5 rounded-lg bg-navy-950 hover:bg-navy-900 text-white text-xs font-extrabold uppercase tracking-wider transition-all"
+          >
+            Deploy Civil Trades Now
+          </button>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          SECTORS & CATEGORIES (GRID)
+      ========================================================================= */}
+      <section id="sectors" className="py-20 bg-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-xs font-bold tracking-widest text-gold-600 uppercase mb-2">Our Specialized Domains</h2>
+            <h3 className="text-3xl sm:text-4xl font-extrabold text-navy-950">Six Core Manpower Verticals</h3>
+            <p className="mt-3 text-slate-600 text-sm sm:text-base">
+              From technical trades to clinical support, Afaq Al Mitanah fulfills corporate human resource mandates with zero regulatory friction.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SECTORS.map((sector) => {
+              const Icon = sector.icon;
+              return (
+                <div 
+                  key={sector.id} 
+                  className={`bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl transition-all duration-300 border flex flex-col justify-between group ${
+                    sector.flagship ? 'border-amber-400 ring-1 ring-amber-400/50' : 'border-slate-200'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3.5 rounded-xl bg-navy-50 text-navy-900 group-hover:bg-navy-900 group-hover:text-gold-400 transition-colors">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      {sector.flagship && (
+                        <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded bg-amber-100 text-amber-800">
+                          Main Flagship
+                        </span>
+                      )}
+                    </div>
+                    <h4 className="text-xl font-bold text-navy-950 group-hover:text-gold-600 transition-colors">{sector.name}</h4>
+                    <p className="text-xs font-semibold text-slate-400 mb-3 font-mono">{sector.arabic}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">{sector.desc}</p>
+                    
+                    <div className="space-y-1.5 mb-6">
+                      <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Available Profiles:</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {sector.roles.slice(0, 4).map((r, i) => (
+                          <span key={i} className="text-[11px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-medium">
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button 
+                    onClick={() => {
+                      setConfigSector(sector.id);
+                      scrollToSection('builder');
+                    }}
+                    className="w-full py-2.5 rounded-xl border border-slate-300 hover:border-navy-900 bg-white hover:bg-navy-900 text-navy-900 hover:text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
+                  >
+                    Hire Staff in this Sector <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          INTERACTIVE MODULE: "BUILD A TEAM" CONFIGURATOR
+      ========================================================================= */}
+      <section id="builder" className="py-20 bg-navy-950 text-white relative">
+        <div className="max-w-5xl mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-gold-500/20 text-gold-400 border border-gold-500/30 uppercase">
+              Interactive Workforce Calculator
+            </span>
+            <h3 className="text-3xl sm:text-4xl font-extrabold mt-3">Configure & Deploy Your Team</h3>
+            <p className="text-slate-400 text-sm mt-2">
+              Select your exact requirements below to generate an immediate verified mobilization quote.
+            </p>
+          </div>
+
+          <div className="bg-navy-900 rounded-3xl border border-navy-800 p-6 sm:p-10 shadow-2xl">
+            <div className="grid md:grid-cols-2 gap-8">
+              
+              {/* Left Column: Configuration Controls */}
+              <div className="space-y-6">
+                {/* Step 1: Sector */}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                    Step 1: Choose Sector
+                  </label>
+                  <select 
+                    value={configSector} 
+                    onChange={(e) => setConfigSector(e.target.value)}
+                    className="w-full bg-navy-950 border border-navy-700 rounded-xl px-4 py-3 text-slate-200 text-sm font-medium focus:outline-none focus:border-gold-500"
+                  >
+                    {SECTORS.map(s => (
+                      <option key={s.id} value={s.id}>{s.name} ({s.arabic})</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Step 2: Role Selection */}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                    Step 2: Primary Role Title
+                  </label>
+                  <select 
+                    value={configRole} 
+                    onChange={(e) => setConfigRole(e.target.value)}
+                    className="w-full bg-navy-950 border border-navy-700 rounded-xl px-4 py-3 text-slate-200 text-sm font-medium focus:outline-none focus:border-gold-500"
+                  >
+                    {SECTORS.find(s => s.id === configSector)?.roles.map((r, idx) => (
+                      <option key={idx} value={r}>{r}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Step 3: Quantity Slider */}
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <label className="text-xs font-bold uppercase tracking-wider text-gold-400">
+                      Step 3: Number of Workers
+                    </label>
+                    <span className="text-lg font-black text-white px-2.5 py-0.5 rounded bg-navy-950 border border-navy-700">
+                      {configQuantity} Personnel
+                    </span>
+                  </div>
+                  <input 
+                    type="range" 
+                    min="5" 
+                    max="300" 
+                    step="5"
+                    value={configQuantity}
+                    onChange={(e) => setConfigQuantity(Number(e.target.value))}
+                    className="w-full accent-gold-500 h-2 bg-navy-950 rounded-lg cursor-pointer"
+                  />
+                  <div className="flex justify-between text-[11px] text-slate-500 mt-1">
+                    <span>5 workers</span>
+                    <span>100 workers</span>
+                    <span>300+ workers</span>
+                  </div>
+                </div>
+
+                {/* Step 4: Duration & Location */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                      Duration
+                    </label>
+                    <select 
+                      value={configDuration} 
+                      onChange={(e) => setConfigDuration(e.target.value)}
+                      className="w-full bg-navy-950 border border-navy-700 rounded-xl px-3 py-2.5 text-slate-200 text-xs font-medium focus:outline-none focus:border-gold-500"
+                    >
+                      <option value="3 Months Short-term">3 Months (Short-term)</option>
+                      <option value="6 Months">6 Months</option>
+                      <option value="12 Months Renewable">12 Months (Renewable)</option>
+                      <option value="24+ Months Mega-project">24+ Months (Project-based)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gold-400 mb-2">
+                      KSA Location
+                    </label>
+                    <select 
+                      value={configLocation} 
+                      onChange={(e) => setConfigLocation(e.target.value)}
+                      className="w-full bg-navy-950 border border-navy-700 rounded-xl px-3 py-2.5 text-slate-200 text-xs font-medium focus:outline-none focus:border-gold-500"
+                    >
+                      <option value="Riyadh Region">Riyadh & Central</option>
+                      <option value="Jeddah / Makkah">Jeddah / Western</option>
+                      <option value="Dammam / Khobar">Eastern Province</option>
+                      <option value="NEOM / Tabuk">NEOM / Red Sea</option>
+                      <option value="Other KSA Region">Other (On-Demand)</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Live Summary & Direct Output */}
+              <div className="bg-navy-950 rounded-2xl p-6 border border-navy-800 flex flex-col justify-between">
+                <div>
+                  <h4 className="text-base font-bold text-white border-b border-navy-800 pb-3 flex items-center justify-between">
+                    <span>Deployment Summary</span>
+                    <span className="text-[10px] font-mono text-gold-400 bg-gold-500/10 px-2 py-0.5 rounded">
+                      ESTIMATE READY
+                    </span>
+                  </h4>
+
+                  <dl className="mt-4 space-y-3 text-xs">
+                    <div className="flex justify-between py-1 border-b border-navy-900">
+                      <dt className="text-slate-400">Sector:</dt>
+                      <dd className="font-semibold text-slate-200">{SECTORS.find(s => s.id === configSector)?.name}</dd>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-navy-900">
+                      <dt className="text-slate-400">Target Role:</dt>
+                      <dd className="font-semibold text-gold-400">{configRole}</dd>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-navy-900">
+                      <dt className="text-slate-400">Requested Strength:</dt>
+                      <dd className="font-semibold text-slate-200">{configQuantity} Specialists</dd>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-navy-900">
+                      <dt className="text-slate-400">Contract Span:</dt>
+                      <dd className="font-semibold text-slate-200">{configDuration}</dd>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-navy-900">
+                      <dt className="text-slate-400">Deployment Base:</dt>
+                      <dd className="font-semibold text-slate-200">{configLocation}</dd>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-navy-900">
+                      <dt className="text-slate-400">Legal Compliance:</dt>
+                      <dd className="font-semibold text-emerald-400 flex items-center gap-1">
+                        <CheckCircle2 className="w-3.5 h-3.5" /> 100% Iqama, Qiwa & Insurance
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <div className="mt-4 space-y-2">
+                    <input 
+                      type="text" 
+                      placeholder="Your Company Name" 
+                      value={clientName}
+                      onChange={(e) => setClientName(e.target.value)}
+                      className="w-full bg-navy-900 border border-navy-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-500"
+                    />
+                    <input 
+                      type="tel" 
+                      placeholder="Contact Mobile (+966)" 
+                      value={clientPhone}
+                      onChange={(e) => setClientPhone(e.target.value)}
+                      className="w-full bg-navy-900 border border-navy-700 rounded-lg px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-navy-800 space-y-2">
+                  <button 
+                    onClick={handleWhatsAppQuote}
+                    className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-colors shadow-lg shadow-emerald-950/50"
+                  >
+                    <MessageCircle className="w-4 h-4" /> Dispatch Request via WhatsApp
+                  </button>
+                  <p className="text-[10px] text-center text-slate-500">
+                    Direct routing to Afaq Al Mitanah Commercial Operations Desk
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          ABOUT US & REGULATORY COMPLIANCE
+      ========================================================================= */}
+      <section id="about" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-xs font-bold tracking-widest text-gold-600 uppercase">Institutional Integrity</span>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-navy-950 mt-2">
+                Building Saudi Arabia's Future Industrial Workforce
+              </h3>
+              <p className="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                Headquartered in the Kingdom, <strong>Afaq Al Mitanah</strong> operates at the junction of operational agility and legal precision. We solve mission-critical staffing shortages by supplying pre-screened, medically tested, and certified personnel ready for immediate onboarding.
+              </p>
+
+              <div className="mt-8 grid sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                  <FileCheck className="w-6 h-6 text-navy-900 mb-2" />
+                  <h5 className="font-bold text-navy-950 text-sm">Full Qiwa & Ajeer Licensing</h5>
+                  <p className="text-xs text-slate-500 mt-1">Legally sanctioned contract transfers ensuring comprehensive labor office conformity.</p>
+                </div>
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50">
+                  <ShieldCheck className="w-6 h-6 text-gold-600 mb-2" />
+                  <h5 className="font-bold text-navy-950 text-sm">Safety & Medical Clearances</h5>
+                  <p className="text-xs text-slate-500 mt-1">OSHA/NEBOSH trained supervisors with comprehensive GOSI and CCHI health insurance.</p>
+                </div>
+              </div>
+
+              <div className="mt-8 flex items-center gap-6">
+                <div>
+                  <div className="text-2xl font-black text-navy-900">48h - 72h</div>
+                  <div className="text-xs text-slate-500 font-medium">Average Mobilization Speed</div>
+                </div>
+                <div className="w-px h-10 bg-slate-200"></div>
+                <div>
+                  <div className="text-2xl font-black text-navy-900">100%</div>
+                  <div className="text-xs text-slate-500 font-medium">Valid Iqama & Medical Fitness</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="bg-gradient-to-tr from-navy-950 to-navy-800 rounded-3xl p-8 text-white relative shadow-2xl">
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                  <Building2 className="w-40 h-40" />
+                </div>
+                <h4 className="text-xl font-bold mb-4 text-gold-400">Our Core Value Proposition</h4>
+                <div className="space-y-4">
+                  {[
+                    { title: 'Elimination of Recruitment Headaches', desc: 'We absorb visa allocation, medical testing, ticketing, and housing responsibilities.' },
+                    { title: 'Elastic Workforce Scaling', desc: 'Expand or contract your headcount in sync with project phases without severance overhead.' },
+                    { title: 'Dedicated On-Site Coordination', desc: 'Multilingual field coordinators oversee attendance, payroll, and accommodation.' },
+                    { title: 'Zero Labor Law Liability', desc: 'Our personnel operate under completely compliant Saudi employment frameworks.' }
+                  ].map((val, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-gold-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h6 className="text-sm font-bold text-slate-100">{val.title}</h6>
+                        <p className="text-xs text-slate-400">{val.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          DETAILED SERVICES BREAKDOWN
+      ========================================================================= */}
+      <section id="services" className="py-20 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-xs font-bold tracking-widest text-gold-600 uppercase">Operational Engagement</span>
+            <h3 className="text-3xl sm:text-4xl font-extrabold text-navy-950 mt-2">Flexible Contracting Models</h3>
+            <p className="text-slate-600 text-sm mt-3">Tailored workforce agreements designed to match private contractors, conglomerates, and government initiatives.</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: 'Short-Term Surge Staffing',
+                duration: '1 to 6 Months',
+                desc: 'Rapid mobilization for project deadlines, shutdown maintenance, and sudden volume spikes.',
+                features: ['Immediate dispatch', 'Daily/Monthly billing', 'Rapid replacements']
+              },
+              {
+                title: 'Long-Term Placement',
+                duration: '12 to 36 Months',
+                desc: 'Dedicated workforce teams integrated into your regular operations with sustained performance tracking.',
+                features: ['Consistent personnel', 'Dedicated HR liaison', 'Payroll management']
+              },
+              {
+                title: 'Turnkey Trade Packages',
+                duration: 'Milestone-Based',
+                desc: 'Complete teams with trade foremen for specific civil, electrical, or technical packages.',
+                features: ['Skill-certified teams', 'Foreman oversight', 'SLA commitments']
+              },
+              {
+                title: 'Camp & Facility Janitorial',
+                duration: 'Annual Contract',
+                desc: 'End-to-end cleaning, hygiene, catering, and upkeep for remote camps and central offices.',
+                features: ['Equipment included', 'Consumables supply', 'Hygiene certification']
+              }
+            ].map((srv, idx) => (
+              <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+                <div>
+                  <span className="text-[11px] font-mono font-bold text-gold-600 bg-gold-50 px-2 py-0.5 rounded">
+                    {srv.duration}
+                  </span>
+                  <h4 className="text-lg font-bold text-navy-950 mt-3">{srv.title}</h4>
+                  <p className="text-xs text-slate-600 mt-2 leading-relaxed">{srv.desc}</p>
+                  <ul className="mt-4 space-y-1.5 border-t border-slate-100 pt-3">
+                    {srv.features.map((f, i) => (
+                      <li key={i} className="text-[11px] text-slate-700 flex items-center gap-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="mt-6 w-full py-2 rounded-lg bg-slate-100 hover:bg-navy-900 text-navy-950 hover:text-white font-bold text-xs transition-colors"
+                >
+                  Inquire Service
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          RECENT PROJECTS & TRACK RECORD
+      ========================================================================= */}
+      <section id="projects" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+              <span className="text-xs font-bold tracking-widest text-gold-600 uppercase">Track Record</span>
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-navy-950 mt-2">Executed Manpower Deployments</h3>
+            </div>
+            <div className="flex gap-2 mt-4 md:mt-0 flex-wrap">
+              {['all', 'construction', 'medical', 'factory', 'logistics'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`text-xs px-3.5 py-1.5 rounded-full font-bold uppercase transition-all ${
+                    activeTab === tab 
+                      ? 'bg-navy-900 text-white' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {PROJECTS
+              .filter(p => activeTab === 'all' || p.sector === activeTab)
+              .map((proj, idx) => (
+                <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-5 hover:border-gold-500 transition-colors">
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-navy-100 text-navy-800">
+                    {proj.badge}
+                  </span>
+                  <h4 className="font-extrabold text-navy-950 text-base mt-3 leading-snug">{proj.title}</h4>
+                  <div className="mt-4 pt-3 border-t border-slate-200 space-y-1 text-xs">
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Volume:</span>
+                      <span className="font-bold text-navy-900">{proj.workers}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Timeline:</span>
+                      <span className="font-bold text-slate-700">{proj.period}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          CONTACT US SECTION & FORM
+      ========================================================================= */}
+      <section id="contact" className="py-20 bg-slate-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8">
+          <div className="grid lg:grid-cols-12 gap-12">
+            
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <span className="text-xs font-bold tracking-widest text-gold-600 uppercase">Direct Inquiries</span>
+                <h3 className="text-3xl font-extrabold text-navy-950 mt-1">Connect with Our Workforce Desk</h3>
+                <p className="text-slate-600 text-sm mt-2">
+                  Have an RFP or urgent personnel tender? Submit your terms or connect with our corporate account supervisors.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-200">
+                  <MapPin className="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h6 className="font-bold text-sm text-navy-950">Kingdom Headquarters</h6>
+                    <p className="text-xs text-slate-600">Olaya Business Corridor, Riyadh, Kingdom of Saudi Arabia</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-200">
+                  <Phone className="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h6 className="font-bold text-sm text-navy-950">Direct Corporate Lines</h6>
+                    <p className="text-xs text-slate-600">+966 11 000 0000 / +966 50 000 0000</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 bg-white rounded-xl border border-slate-200">
+                  <Mail className="w-5 h-5 text-gold-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h6 className="font-bold text-sm text-navy-950">Official Tenders & RFPs</h6>
+                    <p className="text-xs text-slate-600">bids@afaqmitanah.com / info@afaqmitanah.com</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* MAP PLACEHOLDER */}
+              <div className="h-44 w-full rounded-2xl bg-navy-950 relative overflow-hidden flex items-center justify-center border border-navy-800">
+                <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#F59E0B_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div className="text-center p-4 relative z-10">
+                  <MapPin className="w-6 h-6 text-gold-500 mx-auto mb-1" />
+                  <span className="text-xs font-bold text-white block">Riyadh Regional Operations Center</span>
+                  <span className="text-[10px] text-slate-400">Serving all provinces across the Kingdom</span>
+                </div>
+              </div>
+            </div>
+
+            {/* FORM */}
+            <div className="lg:col-span-7">
+              <div className="bg-white rounded-3xl p-8 border border-slate-200 shadow-xl">
+                <h4 className="text-xl font-bold text-navy-950 mb-1">Corporate Workforce Request Form</h4>
+                <p className="text-xs text-slate-500 mb-6">Receive formal quotations within 4 commercial hours.</p>
+
+                {formSubmitted ? (
+                  <div className="p-6 bg-emerald-50 border border-emerald-300 rounded-2xl text-center space-y-2">
+                    <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
+                    <h5 className="font-bold text-emerald-950">Request Logged Successfully</h5>
+                    <p className="text-xs text-emerald-800">Our account executive will contact you with rate cards and candidate availability profiles.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleContactSubmit} className="space-y-4">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
+                        <input 
+                          type="text" 
+                          required 
+                          value={formData.name}
+                          onChange={(e) => setFormData({...formData, name: e.target.value})}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-navy-900" 
+                          placeholder="Fahad Al-Otaibi"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Company / Establishment *</label>
+                        <input 
+                          type="text" 
+                          required 
+                          value={formData.company}
+                          onChange={(e) => setFormData({...formData, company: e.target.value})}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-navy-900" 
+                          placeholder="Saudi Contracting Co."
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Corporate Email *</label>
+                        <input 
+                          type="email" 
+                          required 
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-navy-900" 
+                          placeholder="f.otaibi@company.sa"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-700 mb-1">Mobile / WhatsApp *</label>
+                        <input 
+                          type="tel" 
+                          required 
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-navy-900" 
+                          placeholder="+966 5X XXX XXXX"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Required Manpower Category</label>
+                      <select 
+                        value={formData.service}
+                        onChange={(e) => setFormData({...formData, service: e.target.value})}
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-navy-900"
+                      >
+                        {SECTORS.map(s => (
+                          <option key={s.id} value={s.name}>{s.name}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-slate-700 mb-1">Job Details & Headcount Needed</label>
+                      <textarea 
+                        rows={3} 
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        placeholder="State trades, number of workers, project location, and start date..."
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-navy-900"
+                      ></textarea>
+                    </div>
+
+                    <button 
+                      type="submit" 
+                      className="w-full py-3.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2"
+                    >
+                      <Send className="w-4 h-4" /> Transmit Workforce Tender
+                    </button>
+                  </form>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* =========================================================================
+          FOOTER
+      ========================================================================= */}
+      <footer className="bg-navy-950 text-slate-400 text-xs border-t border-navy-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+          
+          <div className="lg:col-span-2 space-y-4">
+            <BrandLogo dark={true} />
+            <p className="text-slate-400 text-xs max-w-sm leading-relaxed mt-4">
+              <strong>Afaq Al Mitanah (أفاق المتانة)</strong> provides institutional-grade manpower solutions across the Kingdom of Saudi Arabia. Specializing in rapid staffing, civil trade crews, hospital support, and industrial operations.
+            </p>
+            <div className="pt-2 text-[11px] text-slate-500">
+              Commercial Registration (CR) & Labor Office Certified.
+            </div>
+          </div>
+
+          <div>
+            <h5 className="font-bold text-white uppercase tracking-wider text-xs mb-3">Workforce Sectors</h5>
+            <ul className="space-y-2">
+              {SECTORS.map((sec) => (
+                <li key={sec.id}>
+                  <button onClick={() => { setConfigSector(sec.id); scrollToSection('builder'); }} className="hover:text-gold-400 transition-colors">
+                    {sec.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h5 className="font-bold text-white uppercase tracking-wider text-xs mb-3">Quick Links</h5>
+            <ul className="space-y-2">
+              <li><button onClick={() => scrollToSection('home')} className="hover:text-white">Home Page</button></li>
+              <li><button onClick={() => scrollToSection('about')} className="hover:text-white">Company Profile</button></li>
+              <li><button onClick={() => scrollToSection('services')} className="hover:text-white">Contracting Terms</button></li>
+              <li><button onClick={() => scrollToSection('builder')} className="hover:text-white text-gold-400">Team Calculator</button></li>
+              <li><button onClick={() => scrollToSection('projects')} className="hover:text-white">Past Deployments</button></li>
+              <li><button onClick={() => scrollToSection('contact')} className="hover:text-white">Contact & Bids</button></li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 className="font-bold text-white uppercase tracking-wider text-xs mb-3">Regulatory Conformity</h5>
+            <div className="space-y-2.5">
+              <span className="inline-block px-2.5 py-1 bg-navy-900 rounded border border-navy-800 text-[11px] text-slate-300">Qiwa Portal Ready</span>
+              <span className="inline-block px-2.5 py-1 bg-navy-900 rounded border border-navy-800 text-[11px] text-slate-300">Ajeer Authorized</span>
+              <span className="inline-block px-2.5 py-1 bg-navy-900 rounded border border-navy-800 text-[11px] text-slate-300">GOSI & CCHI Compliant</span>
+              <span className="inline-block px-2.5 py-1 bg-navy-900 rounded border border-navy-800 text-[11px] text-slate-300">Balady Registered</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 border-t border-navy-900 text-center flex flex-col sm:flex-row justify-between items-center gap-2 text-slate-500">
+          <p>© 2026 Afaq Al Mitanah. All Rights Reserved. (شركة أفاق المتانة للمقاولات والتشغيل)</p>
+          <div className="flex gap-4">
+            <span className="cursor-pointer hover:underline">Privacy Policy</span>
+            <span>•</span>
+            <span className="cursor-pointer hover:underline">Terms of Manpower Supply</span>
+          </div>
+        </div>
+      </footer>
+
+      {/* =========================================================================
+          FLOATING WHATSAPP CTA WIDGET
+      ========================================================================= */}
+      <aside aria-label="Contact via WhatsApp" className="fixed bottom-6 right-6 z-50 flex items-center gap-2">
+        <a 
+          href="https://wa.me/966500000000?text=Hello%20Afaq%20Al%20Mitana%20team,%20I%20am%20interested%20in%20hiring%20manpower/workforce%20for%20my%20business."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative flex items-center justify-center p-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl transition-all duration-300 hover:scale-105"
+        >
+          {/* Subtle pulse ring */}
+          <span className="absolute -inset-1 rounded-full bg-emerald-400 opacity-40 animate-ping"></span>
+          <MessageCircle className="w-7 h-7 relative z-10" />
+          <span className="hidden group-hover:inline-block ml-2 text-xs font-extrabold pr-2 whitespace-nowrap">
+            Chat with Recruitment Desk
+          </span>
+        </a>
+      </aside>
+
+    </div>
+  );
+}

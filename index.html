@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Afaq Al Mitanah | Premier Manpower Supply & Workforce Solutions Saudi Arabia (أفاق المتانة)</title>
+  <meta name="description" content="Afaq Al Mitanah is a leading Saudi manpower supply company providing skilled, civil, industrial, cleaning, logistics, and medical workforce across the Kingdom of Saudi Arabia in alignment with Vision 2030." />
+
+  <!-- Google Fonts: Inter (English) & Tajawal (Arabic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            corporateNavy: '#003366',
+            corporateNavyDark: '#001D3D',
+            corporateNavyLight: '#004080',
+            corporateGold: '#D4AF37',
+            corporateGoldLight: '#F3E5AB',
+            corporateGoldDark: '#B38F24',
+            slateCustom: '#64748B'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            arabic: ['Tajawal', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-slate-50 text-slate-800 font-sans selection:bg-corporateGold selection:text-white">
+
+  <!-- =========================================================================
+       1. TOP INFO BAR (KSA Regulatory & Contact Strip)
+  ========================================================================== -->
+  <div class="bg-corporateNavyDark text-slate-300 text-xs sm:text-sm py-2 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-slate-200">
+          <i class="fa-solid fa-certificate text-corporateGold"></i>
+          <span>Kingdom of Saudi Arabia | Vision 2030 Manpower Partner</span>
+        </span>
+        <span class="hidden md:inline text-slate-600">|</span>
+        <span class="hidden md:flex items-center gap-1.5 text-slate-300">
+          <i class="fa-solid fa-shield-halved text-corporateGold"></i>
+          <span>100% Qiwa & Ajeer Accredited</span>
+        </span>
+      </div>
+      <div class="flex items-center gap-5 text-xs">
+        <a href="tel:+966114567890" class="flex items-center gap-1.5 hover:text-corporateGold transition">
+          <i class="fa-solid fa-phone text-corporateGold"></i>
+          <span>+966 11 456 7890</span>
+        </a>
+        <a href="mailto:info@afaqalmitanah.com" class="flex items-center gap-1.5 hover:text-corporateGold transition">
+          <i class="fa-solid fa-envelope text-corporateGold"></i>
+          <span>info@afaqalmitanah.com</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. MAIN NAVIGATION BAR
+  ========================================================================== -->
+  <header id="main-header" class="sticky top-0 z-50 bg-corporateNavy/95 text-white shadow-xl backdrop-blur-md transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Company Logo & Brand -->
+        <a href="#home" class="flex items-center gap-3.5 group">
+          <div class="relative w-12 h-12 rounded-xl bg-gradient-to-br from-corporateGold to-corporateGoldDark p-0.5 shadow-lg group-hover:scale-105 transition-transform flex items-center justify-center">
+            <div class="w-full h-full bg-corporateNavy rounded-[10px] flex items-center justify-center overflow-hidden">
+              <!-- Logo with automatic icon fallback if logo.png is not found -->
+              <img 
+                src="logo.png" 
+                alt="Afaq Al Mitanah Logo" 
+                class="w-full h-full object-contain p-1"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="hidden w-full h-full items-center justify-center text-corporateGold font-black text-xl">
+                <i class="fa-solid fa-people-group"></i>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xl sm:text-2xl font-black tracking-tight text-white uppercase font-sans">
+              Afaq Al Mitanah
+            </span>
+            <div class="flex items-center gap-2">
+              <span class="text-[11px] text-corporateGold font-semibold tracking-wider uppercase">
+                Workforce Solutions
+              </span>
+              <span class="text-[11px] text-slate-300 font-arabic font-medium">
+                (أفاق المتانة)
+              </span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <a href="#home" class="hover:text-corporateGold transition-colors">Home</a>
+          <a href="#about" class="hover:text-corporateGold transition-colors">About Us</a>
+          <a href="#services" class="hover:text-corporateGold transition-colors">Services</a>
+          <a href="#why-us" class="hover:text-corporateGold transition-colors">Why Choose Us</a>
+          <a href="#contact" class="hover:text-corporateGold transition-colors">Contact</a>
+        </nav>
+
+        <!-- CTA & WhatsApp Button -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="#contact" class="bg-corporateGold hover:bg-corporateGoldDark text-corporateNavy font-extrabold px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition flex items-center gap-2 text-sm">
+            <span>Request Workforce</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Hamburger Toggle -->
+        <div class="lg:hidden flex items-center">
+          <button id="menu-toggle" class="p-2 rounded-lg bg-white/10 text-white hover:bg-white/20 transition" aria-label="Toggle Navigation">
+            <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-corporateNavyDark border-t border-white/10 px-4 pt-3 pb-6 space-y-3">
+      <a href="#home" class="mobile-nav-link block py-2 text-white hover:text-corporateGold font-medium">Home</a>
+      <a href="#about" class="mobile-nav-link block py-2 text-white hover:text-corporateGold font-medium">About Us</a>
+      <a href="#services" class="mobile-nav-link block py-2 text-white hover:text-corporateGold font-medium">Services</a>
+      <a href="#why-us" class="mobile-nav-link block py-2 text-white hover:text-corporateGold font-medium">Why Choose Us</a>
+      <a href="#contact" class="mobile-nav-link block py-2 text-white hover:text-corporateGold font-medium">Contact</a>
+      <a href="#contact" class="mobile-nav-link block w-full text-center bg-corporateGold text-corporateNavy font-bold py-2.5 rounded-lg mt-4 shadow">
+        Request Workforce
+      </a>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       3. HERO SECTION
+  ========================================================================== -->
+  <section id="home" class="relative min-h-[660px] lg:min-h-[740px] flex items-center justify-center overflow-hidden">
+    <!-- Unsplash Background with Premium Dark Navy Overlay -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1600"
+        alt="Saudi Construction and Manpower Operations"
+        class="w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-corporateNavyDark/95 via-corporateNavy/90 to-corporateNavyDark/85"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(212,175,55,0.18),transparent_65%)]"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 text-white w-full">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Content Column -->
+        <div class="lg:col-span-8 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-corporateGold/20 border border-corporateGold/40 text-corporateGold text-xs sm:text-sm font-semibold tracking-wide">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Premier Manpower Supply & Contracting in KSA</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
+            Reliable & Skilled <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-corporateGold via-yellow-200 to-corporateGold">
+              Workforce Supply
+            </span> Across Saudi Arabia
+          </h1>
+
+          <p class="text-base sm:text-xl text-slate-200 max-w-2xl leading-relaxed font-light">
+            Supplying certified, legally regularized, and trade-tested manpower for major infrastructure, medical, cleaning, industrial, and mega giga-projects across the Kingdom.
+          </p>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-3">
+            <a href="#services" class="bg-corporateGold hover:bg-corporateGoldDark text-corporateNavy font-extrabold px-7 py-3.5 rounded-xl shadow-xl hover:shadow-corporateGold/20 transition flex items-center gap-2 group text-base">
+              <span>Explore Our Services</span>
+              <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </a>
+
+            <a href="#contact" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-xl backdrop-blur-md border border-white/20 transition text-base flex items-center gap-2">
+              <i class="fa-solid fa-headset text-corporateGold"></i>
+              <span>Contact Sales Desk</span>
+            </a>
+          </div>
+
+          <!-- Feature Pills -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 border-t border-white/15">
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
+              <i class="fa-solid fa-circle-check text-corporateGold"></i>
+              <span>100% Qiwa & Ajeer Compliant</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
+              <i class="fa-solid fa-circle-check text-corporateGold"></i>
+              <span>48-72h Rapid Mobilization</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs sm:text-sm text-slate-200">
+              <i class="fa-solid fa-circle-check text-corporateGold"></i>
+              <span>Full Medical Insurance (CCHI)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Quick Requisition Box -->
+        <div class="lg:col-span-4">
+          <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6 sm:p-7 shadow-2xl text-white">
+            <div class="flex items-center justify-between pb-4 border-b border-white/10">
+              <div>
+                <h3 class="font-bold text-lg text-white">Need Workers Fast?</h3>
+                <p class="text-xs text-slate-300">Direct KSA Procurement Operations</p>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-semibold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Active Deployments
+              </span>
+            </div>
+
+            <div class="space-y-4 py-5 text-sm">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-corporateGold/20 flex items-center justify-center text-corporateGold shrink-0 mt-0.5">
+                  <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">Rapid Regional Dispatch</p>
+                  <p class="text-xs text-slate-300">Riyadh, Jeddah, Dammam, Al Khobar, NEOM</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-corporateGold/20 flex items-center justify-center text-corporateGold shrink-0 mt-0.5">
+                  <i class="fa-solid fa-bed"></i>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">Managed Camps & AC Fleet</p>
+                  <p class="text-xs text-slate-300">Housing, nutrition, and scheduled site shuttles</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-corporateGold/20 flex items-center justify-center text-corporateGold shrink-0 mt-0.5">
+                  <i class="fa-solid fa-user-check"></i>
+                </div>
+                <div>
+                  <p class="font-semibold text-white">Trade-Tested Qualifications</p>
+                  <p class="text-xs text-slate-300">Certified technicians & safety-drilled helpers</p>
+                </div>
+              </div>
+            </div>
+
+            <a href="#contact" class="w-full block text-center bg-corporateGold hover:bg-corporateGoldDark text-corporateNavy font-extrabold py-3 rounded-xl shadow-lg transition">
+              Request a Formal Proposal
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. STATS SECTION (Floating Highlight Bar)
+  ========================================================================== -->
+  <section class="relative z-20 -mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+      <div class="flex flex-col items-center text-center">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-corporateNavy font-sans">500+</span>
+        <span class="text-sm font-bold text-slate-800 mt-1">Projects Completed</span>
+        <span class="text-xs text-slate-400 font-arabic mt-0.5">مشروع منجز في المملكة</span>
+      </div>
+      <div class="flex flex-col items-center text-center pt-4 lg:pt-0">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-corporateNavy font-sans">10,000+</span>
+        <span class="text-sm font-bold text-slate-800 mt-1">Skilled Workers Deployed</span>
+        <span class="text-xs text-slate-400 font-arabic mt-0.5">كوادر مؤهلة تم توظيفها</span>
+      </div>
+      <div class="flex flex-col items-center text-center pt-4 lg:pt-0">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-corporateNavy font-sans">100%</span>
+        <span class="text-sm font-bold text-slate-800 mt-1">Labor Law Compliance</span>
+        <span class="text-xs text-slate-400 font-arabic mt-0.5">التزام تام بأنظمة قوى وأجير</span>
+      </div>
+      <div class="flex flex-col items-center text-center pt-4 lg:pt-0">
+        <span class="text-3xl sm:text-4xl lg:text-5xl font-black text-corporateNavy font-sans">99%</span>
+        <span class="text-sm font-bold text-slate-800 mt-1">Client Satisfaction</span>
+        <span class="text-xs text-slate-400 font-arabic mt-0.5">نسبة رضا شركائنا في الأعمال</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       5. ABOUT US SECTION
+  ========================================================================== -->
+  <section id="about" class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Photography Column -->
+        <div class="lg:col-span-5 relative">
+          <div class="relative mx-auto max-w-md lg:max-w-none">
+            <div class="rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <img
+                src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b7?auto=format&fit=crop&q=80&w=700"
+                alt="Engineers and Manpower Management"
+                class="w-full h-[420px] object-cover"
+              />
+            </div>
+            <!-- Floating Years Badge -->
+            <div class="absolute -bottom-6 -right-4 sm:right-6 bg-corporateNavy text-white p-5 rounded-2xl shadow-xl border border-corporateGold/30 max-w-[220px]">
+              <p class="text-3xl font-extrabold text-corporateGold">15+ Years</p>
+              <p class="text-xs text-slate-200 font-medium mt-1">
+                Delivering workforce excellence across Saudi infrastructure.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content Column -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-corporateNavy/10 text-corporateNavy text-xs font-bold uppercase tracking-wider">
+            <i class="fa-solid fa-building text-corporateGold"></i>
+            <span>About Afaq Al Mitanah (شركة أفاق المتانة)</span>
+          </div>
+
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-corporateNavy tracking-tight leading-snug">
+            Empowering the Kingdom's Growth with Scalable, Disciplined Human Capital
+          </h2>
+
+          <p class="text-slate-600 leading-relaxed text-base sm:text-lg">
+            <strong>Afaq Al Mitanah</strong> is an established Saudi manpower supply contracting firm. We assist Tier-1 contractors, industrial operations, hospitals, and hospitality groups by deploying qualified, safety-trained, and fully documented workforce contingents on both short- and long-term contracts.
+          </p>
+
+          <!-- Mission & Vision Cards -->
+          <div class="grid sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center gap-2 text-corporateNavy font-bold">
+                <i class="fa-solid fa-bullseye text-corporateGold"></i>
+                <span>Our Strategic Mission</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                To eliminate labor shortages and project delays by delivering thoroughly verified tradesmen who uphold international occupational health, safety, and productivity standards.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-xl bg-white border border-slate-200 shadow-sm space-y-2">
+              <div class="flex items-center gap-2 text-corporateNavy font-bold">
+                <i class="fa-solid fa-flag text-corporateGold"></i>
+                <span>Vision 2030 Alignment</span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                Committed to supporting Saudi Arabia's national transformation pipeline with transparent digital contracts through Qiwa, high Saudization levels, and ethical worker welfare.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature Bullets -->
+          <div class="space-y-2.5 pt-2">
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-corporateGold shrink-0"></i>
+              <span class="text-sm font-medium text-slate-700">Turnkey mobilization including visa sponsorship, Iqama transfer, and camp logistics.</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-corporateGold shrink-0"></i>
+              <span class="text-sm font-medium text-slate-700">Practical trade testing in certified workshops before client site deployment.</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fa-solid fa-circle-check text-corporateGold shrink-0"></i>
+              <span class="text-sm font-medium text-slate-700">Multilingual field supervisors ensuring direct communication with site engineers.</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       6. SERVICES / WORKFORCE CATEGORIES GRID (6 Categories)
+  ========================================================================== -->
+  <section id="services" class="py-20 lg:py-28 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-corporateNavy/5 border border-corporateNavy/10 text-corporateNavy text-xs font-bold tracking-wider uppercase">
+          <i class="fa-solid fa-users-gear text-corporateGold"></i>
+          <span>Specialized Manpower Divisions</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-corporateNavy tracking-tight">
+          Comprehensive Workforce Categories
+        </h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Explore our pre-vetted skilled, semi-skilled, and technical personnel ready for rapid deployment across all regions of Saudi Arabia.
+        </p>
+      </div>
+
+      <!-- Categories 6-Card Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Category 1: Construction & Civil -->
+        <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-corporateGold shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&q=80&w=600"
+                alt="Construction & Civil Workers"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 p-2.5 rounded-xl bg-corporateNavy/90 text-corporateGold border border-white/20 shadow-md">
+                <i class="fa-solid fa-helmet-safety text-lg"></i>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4">
+                <span class="text-xs font-semibold text-corporateGold block font-arabic">عمال البناء والتشييد المدني</span>
+                <h3 class="text-lg font-bold text-white leading-tight">Construction & Civil Workers</h3>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Expert block masons, certified electricians, industrial plumbers, shuttering carpenters, and steel fixers for high-velocity civil works.
+              </p>
+              <div>
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Available Trades:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Masons & Plasterers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Electricians</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Steel Fixers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Plumbers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="selectServiceCategory('Construction & Civil Workers')" class="w-full py-2.5 px-4 rounded-xl border border-corporateNavy/20 bg-white group-hover:bg-corporateNavy text-corporateNavy group-hover:text-corporateGold font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
+              <span>Request This Crew</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 2: Cleaning & Facility Management -->
+        <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-corporateGold shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=600"
+                alt="Cleaning & Facility Management"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 p-2.5 rounded-xl bg-corporateNavy/90 text-corporateGold border border-white/20 shadow-md">
+                <i class="fa-solid fa-broom text-lg"></i>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4">
+                <span class="text-xs font-semibold text-corporateGold block font-arabic">خدمات النظافة وإدارة المرافق</span>
+                <h3 class="text-lg font-bold text-white leading-tight">Cleaning & Facility Management</h3>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Trained commercial janitorial teams, high-rise façade cleaners, hospital sanitization crews, and integrated housekeeping staff.
+              </p>
+              <div>
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Available Trades:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Commercial Janitors</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Façade Cleaners</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Waste Handlers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Housekeepers</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="selectServiceCategory('Cleaning & Facility Management')" class="w-full py-2.5 px-4 rounded-xl border border-corporateNavy/20 bg-white group-hover:bg-corporateNavy text-corporateNavy group-hover:text-corporateGold font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
+              <span>Request This Crew</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 3: Medical & Healthcare Support -->
+        <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-corporateGold shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600"
+                alt="Medical & Healthcare Support Staff"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 p-2.5 rounded-xl bg-corporateNavy/90 text-corporateGold border border-white/20 shadow-md">
+                <i class="fa-solid fa-user-doctor text-lg"></i>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4">
+                <span class="text-xs font-semibold text-corporateGold block font-arabic">الكوادر الطبية والمساندة الصحية</span>
+                <h3 class="text-lg font-bold text-white leading-tight">Medical & Healthcare Support</h3>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Screened hospital orderlies, lab assistants, nursing attendants, and medical facility maintenance crews compliant with MOH guidelines.
+              </p>
+              <div>
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Available Trades:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Patient Orderlies</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Lab Attendants</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Sterilization Stewards</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="selectServiceCategory('Medical & Healthcare Support')" class="w-full py-2.5 px-4 rounded-xl border border-corporateNavy/20 bg-white group-hover:bg-corporateNavy text-corporateNavy group-hover:text-corporateGold font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
+              <span>Request This Crew</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 4: Factory & Industrial Operators -->
+        <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-corporateGold shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600"
+                alt="Factory & Industrial Operators"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 p-2.5 rounded-xl bg-corporateNavy/90 text-corporateGold border border-white/20 shadow-md">
+                <i class="fa-solid fa-industry text-lg"></i>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4">
+                <span class="text-xs font-semibold text-corporateGold block font-arabic">مشغلو المصانع والعمليات الصناعية</span>
+                <h3 class="text-lg font-bold text-white leading-tight">Factory & Industrial Operators</h3>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Disciplined assembly line workers, plant machine operators, automated packaging technicians, and warehouse sorters.
+              </p>
+              <div>
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Available Trades:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Machine Operators</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Assembly Workers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Packing Helpers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">QA Inspectors</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="selectServiceCategory('Factory & Industrial Operators')" class="w-full py-2.5 px-4 rounded-xl border border-corporateNavy/20 bg-white group-hover:bg-corporateNavy text-corporateNavy group-hover:text-corporateGold font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
+              <span>Request This Crew</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 5: Logistics, Warehousing & Drivers -->
+        <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-corporateGold shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600"
+                alt="Logistics, Warehousing & Drivers"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 p-2.5 rounded-xl bg-corporateNavy/90 text-corporateGold border border-white/20 shadow-md">
+                <i class="fa-solid fa-truck text-lg"></i>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4">
+                <span class="text-xs font-semibold text-corporateGold block font-arabic">اللوجستيات والمستودعات والسائقين</span>
+                <h3 class="text-lg font-bold text-white leading-tight">Logistics, Warehousing & Drivers</h3>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Licensed heavy and light vehicle drivers, certified forklift operators, inventory pickers, and dispatch personnel for distribution hubs.
+              </p>
+              <div>
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Available Trades:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Heavy Trailer Drivers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Forklift Drivers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Inventory Pickers</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Loaders</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="selectServiceCategory('Logistics, Warehousing & Drivers')" class="w-full py-2.5 px-4 rounded-xl border border-corporateNavy/20 bg-white group-hover:bg-corporateNavy text-corporateNavy group-hover:text-corporateGold font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
+              <span>Request This Crew</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category 6: Hospitality & Catering Staff -->
+        <div class="group bg-slate-50 rounded-2xl overflow-hidden border border-slate-200 hover:border-corporateGold shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative h-52 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=600"
+                alt="Hospitality & Catering Staff"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
+              <div class="absolute top-4 left-4 p-2.5 rounded-xl bg-corporateNavy/90 text-corporateGold border border-white/20 shadow-md">
+                <i class="fa-solid fa-utensils text-lg"></i>
+              </div>
+              <div class="absolute bottom-3 left-4 right-4">
+                <span class="text-xs font-semibold text-corporateGold block font-arabic">طواقم الضيافة والإعاشة والفندقة</span>
+                <h3 class="text-lg font-bold text-white leading-tight">Hospitality & Catering Staff</h3>
+              </div>
+            </div>
+            <div class="p-6 space-y-4">
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Bilingual waitstaff, industrial kitchen stewards, banquet servers, commercial kitchen helpers, and barista staff for events and hotel chains.
+              </p>
+              <div>
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">Available Trades:</span>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Hotel Waiters</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Kitchen Stewards</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Line Cooks</span>
+                  <span class="text-xs px-2.5 py-1 rounded bg-white border border-slate-200 text-slate-700">Catering Crew</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p-6 pt-0">
+            <button onclick="selectServiceCategory('Hospitality & Catering Staff')" class="w-full py-2.5 px-4 rounded-xl border border-corporateNavy/20 bg-white group-hover:bg-corporateNavy text-corporateNavy group-hover:text-corporateGold font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-sm">
+              <span>Request This Crew</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       7. WHY CHOOSE US SECTION
+  ========================================================================== -->
+  <section id="why-us" class="py-20 lg:py-28 bg-corporateNavyDark text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-corporateGold/20 border border-corporateGold/30 text-corporateGold text-xs font-bold tracking-wider uppercase">
+          <i class="fa-solid fa-award"></i>
+          <span>Competitive Advantage</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Why Leading Saudi Companies Rely on Afaq Al Mitanah
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base">
+          We protect your project delivery timelines with absolute regulatory transparency, logistical control, and verified technical proficiency.
+        </p>
+      </div>
+
+      <!-- 4 Pillars Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-corporateGold/50 backdrop-blur-md transition space-y-4 group">
+          <div class="w-12 h-12 rounded-xl bg-corporateGold/20 flex items-center justify-center text-corporateGold text-xl group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-bolt-lightning"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">48–72h Rapid Mobilization</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Active stand-by pools in Riyadh, Jeddah, and Eastern Province to fulfill emergency requirements and scale up site teams swiftly.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-corporateGold/50 backdrop-blur-md transition space-y-4 group">
+          <div class="w-12 h-12 rounded-xl bg-corporateGold/20 flex items-center justify-center text-corporateGold text-xl group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">100% Legal & Ministry Compliant</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Full compliance with Qiwa digital employment contracts, Ajeer site permits, GOSI social security, and comprehensive medical coverage.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-corporateGold/50 backdrop-blur-md transition space-y-4 group">
+          <div class="w-12 h-12 rounded-xl bg-corporateGold/20 flex items-center justify-center text-corporateGold text-xl group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Trade-Tested Workforce</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Candidates undergo practical skill evaluation and safety induction in fully equipped workshops before setting foot on your site.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-corporateGold/50 backdrop-blur-md transition space-y-4 group">
+          <div class="w-12 h-12 rounded-xl bg-corporateGold/20 flex items-center justify-center text-corporateGold text-xl group-hover:scale-110 transition-transform">
+            <i class="fa-solid fa-user-tie"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white">Dedicated Account Managers</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Single point of contact handling daily gang timesheets, transportation schedules, replacements, and administrative documentation.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Replacement Guarantee Banner -->
+      <div class="mt-12 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-corporateGold/20 via-corporateGold/10 to-transparent border border-corporateGold/30 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <div class="p-3.5 rounded-xl bg-corporateGold text-corporateNavy text-xl shrink-0">
+            <i class="fa-solid fa-rotate"></i>
+          </div>
+          <div>
+            <h4 class="text-base sm:text-lg font-bold text-white">Immediate 48-Hour Replacement Guarantee</h4>
+            <p class="text-xs sm:text-sm text-slate-300 mt-0.5">
+              If any deployed operative does not meet your site technical standards, we replace them within 48 hours without additional placement fees.
+            </p>
+          </div>
+        </div>
+        <a href="#contact" class="whitespace-nowrap px-6 py-3 rounded-xl bg-corporateGold text-corporateNavy font-extrabold text-xs sm:text-sm hover:bg-corporateGoldDark transition">
+          Inquire Now
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       8. CONTACT & REQUISITION FORM SECTION
+  ========================================================================== -->
+  <section id="contact" class="py-20 lg:py-28 bg-slate-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12">
+        
+        <!-- Left: Contact Details & Office Channels -->
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-corporateNavy/10 text-corporateNavy text-xs font-bold uppercase tracking-wider mb-3">
+              <i class="fa-solid fa-paper-plane text-corporateGold"></i>
+              <span>Direct Procurement</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-corporateNavy tracking-tight">
+              Request a Formal Workforce Proposal
+            </h2>
+            <p class="text-slate-600 mt-3 text-sm sm:text-base leading-relaxed">
+              Submit your project requirements, location, and desired trades. Our recruitment officers will prepare a custom rate-card quotation within 24 hours.
+            </p>
+          </div>
+
+          <!-- Reach Out Cards -->
+          <div class="space-y-4">
+            
+            <a href="tel:+966114567890" class="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-corporateGold transition group">
+              <div class="w-12 h-12 rounded-xl bg-corporateNavy text-corporateGold flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform text-lg">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <span class="text-xs text-slate-400 block font-medium">Head Office Line (Riyadh)</span>
+                <span class="text-sm sm:text-base font-bold text-slate-800">+966 11 456 7890</span>
+              </div>
+            </a>
+
+            <a href="https://wa.me/966501234567?text=Hello%20Afaq%20Al%20Mitanah,%20I%20would%20like%20to%20request%20manpower%20supply." target="_blank" class="flex items-center gap-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 shadow-sm hover:border-emerald-500 transition group">
+              <div class="w-12 h-12 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform text-lg">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <div>
+                <span class="text-xs text-emerald-700 block font-semibold">Instant WhatsApp Desk (24/7)</span>
+                <span class="text-sm sm:text-base font-bold text-emerald-950">+966 50 123 4567</span>
+              </div>
+            </a>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+              <div class="w-12 h-12 rounded-xl bg-corporateNavy text-corporateGold flex items-center justify-center shrink-0 text-lg">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <span class="text-xs text-slate-400 block font-medium">Kingdom Headquarters</span>
+                <span class="text-sm sm:text-base font-bold text-slate-800">
+                  King Fahd Road, Al Olaya District, Riyadh, KSA
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Official CR & License Strip -->
+          <div class="p-4 rounded-xl bg-slate-200/70 border border-slate-300 text-xs text-slate-600 flex items-center gap-3">
+            <i class="fa-solid fa-id-card text-2xl text-corporateNavy shrink-0"></i>
+            <span>
+              Official CR: <strong>1010XXXXXX</strong> | Licensed by the Saudi Ministry of Human Resources and Social Development (MHRSD).
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Requisition Form -->
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 sm:p-10 relative">
+            
+            <!-- Success State Overlay (Hidden by Default) -->
+            <div id="form-success" class="hidden py-12 text-center space-y-4">
+              <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-corporateNavy">Requisition Received Successfully!</h3>
+              <p class="text-sm text-slate-600 max-w-md mx-auto">
+                Thank you for contacting <strong>Afaq Al Mitanah</strong>. Our commercial procurement team is reviewing your requirements and will reach out with candidate profiles within 24 hours.
+              </p>
+              <button onclick="resetContactForm()" class="mt-4 px-6 py-2.5 rounded-xl bg-corporateNavy text-white text-xs sm:text-sm font-semibold hover:bg-corporateNavyDark transition">
+                Submit Another Requisition
+              </button>
+            </div>
+
+            <!-- Form -->
+            <form id="workforce-form" onsubmit="handleFormSubmit(event)" class="space-y-5">
+              <div class="border-b border-slate-100 pb-3">
+                <h3 class="text-lg font-bold text-corporateNavy">Workforce Requisition Form</h3>
+                <p class="text-xs text-slate-400">Fill in your requirements below for an official quotation.</p>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    name="fullName"
+                    id="form-name"
+                    placeholder="e.g. Eng. Abdullah Al-Otaibi"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm transition"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Company / Contractor Name *</label>
+                  <input
+                    type="text"
+                    required
+                    name="companyName"
+                    id="form-company"
+                    placeholder="e.g. Saudi Contracting Ltd."
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm transition"
+                  />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Work Email *</label>
+                  <input
+                    type="email"
+                    required
+                    name="email"
+                    id="form-email"
+                    placeholder="name@company.com"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm transition"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mobile / WhatsApp (KSA) *</label>
+                  <input
+                    type="tel"
+                    required
+                    name="phone"
+                    id="form-phone"
+                    placeholder="+966 5X XXX XXXX"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm transition"
+                  />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Workforce Category *</label>
+                  <select
+                    name="category"
+                    id="form-category"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm bg-white transition"
+                  >
+                    <option value="Construction & Civil Workers">Construction & Civil Workers</option>
+                    <option value="Cleaning & Facility Management">Cleaning & Facility Management</option>
+                    <option value="Medical & Healthcare Support">Medical & Healthcare Support</option>
+                    <option value="Factory & Industrial Operators">Factory & Industrial Operators</option>
+                    <option value="Logistics, Warehousing & Drivers">Logistics, Warehousing & Drivers</option>
+                    <option value="Hospitality & Catering Staff">Hospitality & Catering Staff</option>
+                    <option value="Multiple Trades / Turnkey">Multiple Trades / Turnkey Solution</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Required Headcount *</label>
+                  <select
+                    name="headcount"
+                    id="form-headcount"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm bg-white transition"
+                  >
+                    <option value="1-10">1 – 10 Personnel</option>
+                    <option value="10-25" selected>10 – 25 Personnel</option>
+                    <option value="25-50">25 – 50 Personnel</option>
+                    <option value="50-100">50 – 100 Personnel</option>
+                    <option value="100+">100+ Large-Scale Deployment</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Project Details, Location & Timeline</label>
+                <textarea
+                  rows="3"
+                  name="message"
+                  id="form-message"
+                  placeholder="Specify job site (e.g. Riyadh Metro, NEOM, Red Sea, Dammam Port), estimated start date, and specialized trade requirements..."
+                  class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 focus:border-corporateGold focus:ring-2 focus:ring-corporateGold/20 outline-none text-sm transition resize-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-corporateNavy hover:bg-corporateNavyDark text-corporateGold hover:text-white font-extrabold py-3.5 rounded-xl shadow-lg transition duration-300 flex items-center justify-center gap-2 text-sm"
+              >
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                <span>Submit Official Requisition</span>
+              </button>
+
+              <p class="text-[11px] text-center text-slate-400">
+                All inquiries are protected by commercial confidentiality under Saudi MHRSD terms.
+              </p>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       9. FOOTER
+  ========================================================================== -->
+  <footer class="bg-corporateNavyDark text-slate-300 pt-16 pb-8 border-t border-corporateGold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+        
+        <!-- Company Info -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-corporateGold flex items-center justify-center text-corporateNavy font-black text-xl">
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <div>
+              <span class="text-xl font-black text-white uppercase tracking-tight block">
+                Afaq Al Mitanah
+              </span>
+              <span class="text-xs text-corporateGold font-semibold font-arabic">
+                شركة أفاق المتانة للمقاولات وتوريد الكوادر البشرية
+              </span>
+            </div>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
+            Saudi Arabia's trusted workforce partner. Providing certified technical, civil, mechanical, logistics, and medical personnel compliant with Saudi Vision 2030 standards.
+          </p>
+          <div class="flex items-center gap-2.5 pt-2">
+            <span class="text-[11px] font-semibold text-slate-300 px-2.5 py-1 rounded bg-white/5 border border-white/10">Qiwa Certified</span>
+            <span class="text-[11px] font-semibold text-slate-300 px-2.5 py-1 rounded bg-white/5 border border-white/10">Ajeer Authorized</span>
+            <span class="text-[11px] font-semibold text-slate-300 px-2.5 py-1 rounded bg-white/5 border border-white/10">GOSI Registered</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider">Navigation</h4>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><a href="#home" class="hover:text-corporateGold transition">Home</a></li>
+            <li><a href="#about" class="hover:text-corporateGold transition">About Company</a></li>
+            <li><a href="#services" class="hover:text-corporateGold transition">Workforce Divisions</a></li>
+            <li><a href="#why-us" class="hover:text-corporateGold transition">Why Choose Us</a></li>
+            <li><a href="#contact" class="hover:text-corporateGold transition">Contact & Requisition</a></li>
+          </ul>
+        </div>
+
+        <!-- Divisions -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider">Trades</h4>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li><a href="#services" class="hover:text-corporateGold transition">Civil & Construction</a></li>
+            <li><a href="#services" class="hover:text-corporateGold transition">Cleaning & FM Staff</a></li>
+            <li><a href="#services" class="hover:text-corporateGold transition">Industrial Plant Operators</a></li>
+            <li><a href="#services" class="hover:text-corporateGold transition">Logistics Drivers & Riggers</a></li>
+            <li><a href="#services" class="hover:text-corporateGold transition">Medical Support Aides</a></li>
+          </ul>
+        </div>
+
+        <!-- Regional Hubs -->
+        <div class="space-y-3">
+          <h4 class="text-sm font-bold text-white uppercase tracking-wider">Regional Hubs</h4>
+          <p class="text-xs text-slate-400">
+            <strong>Riyadh Central HQ:</strong><br />
+            King Fahd Road, Al Olaya District
+          </p>
+          <p class="text-xs text-slate-400">
+            <strong>Eastern Province:</strong><br />
+            Al Khobar / Dammam Industrial Area
+          </p>
+          <p class="text-xs text-slate-400">
+            <strong>Western Hub:</strong><br />
+            Jeddah Industrial City & Yanbu
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+        <p>
+          &copy; <span id="current-year"></span> Afaq Al Mitanah Manpower Supply Co. (أفاق المتانة). All rights reserved.
+        </p>
+        <div class="flex items-center gap-6">
+          <span class="hover:text-slate-200 transition cursor-pointer">Saudi Labor Law Compliance</span>
+          <span class="hover:text-slate-200 transition cursor-pointer">Terms of Supply</span>
+          <span class="hover:text-slate-200 transition cursor-pointer">Privacy Policy</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Direct WhatsApp Button -->
+  <a
+    href="https://wa.me/966501234567?text=Hello%20Afaq%20Al%20Mitanah,%20I%20would%20like%20to%20request%20manpower%20supply."
+    target="_blank"
+    class="fixed bottom-6 right-6 z-40 bg-emerald-600 hover:bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform text-2xl"
+    aria-label="Direct WhatsApp Chat"
+  >
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
